@@ -5,6 +5,9 @@ import com.jogamp.opengl.GLEventListener
 import math.ObjImporter
 import math.Shader
 import java.awt.event.KeyListener
+import javax.swing.Spring.height
+
+
 
 object Engine: GLEventListener, KeyListener {
 
@@ -23,8 +26,17 @@ object Engine: GLEventListener, KeyListener {
     }
 
 
-    override fun reshape(p0: GLAutoDrawable?, p1: Int, p2: Int, p3: Int, p4: Int) {
+    override fun reshape(drawable: GLAutoDrawable, x: Int, y: Int, width: Int, height: Int) {
+        val gl = drawable.gl.gL4
 
+        val h = width.toFloat() / height.toFloat()
+        gl.glViewport(0, 0, width, height)
+        gl.gl.gL2.glMatrixMode(GL2.GL_PROJECTION)
+        gl.glLoadIdentity()
+        gl.glFrustumf(-1f, 1f, -h, h, 1f, 100f)
+
+        gl.glMatrixMode(GL2.GL_MODELVIEW)
+        gl.glLoadIdentity()
     }
 
     override fun display(drawable: GLAutoDrawable) {

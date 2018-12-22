@@ -3,9 +3,12 @@ package math
 import com.jogamp.opengl.GL
 import com.jogamp.opengl.GL2
 import com.jogamp.opengl.GL4
+import com.jogamp.opengl.math.Matrix4
+import glm_.glm
 import java.io.BufferedReader
 import java.io.FileReader
 import java.nio.ByteBuffer
+import java.nio.FloatBuffer
 
 class Shader(val gl: GL4, vertexPath: String, fragmentPath: String) {
 
@@ -63,6 +66,10 @@ class Shader(val gl: GL4, vertexPath: String, fragmentPath: String) {
 
     fun setFloat(name: String, value: Float) {
         gl.glUniform1f(gl.glGetUniformLocation(id, name), value)
+    }
+
+    fun setMatrix4f(name: String, value: Matrix4){
+        gl.glUniformMatrix4fv(gl.glGetUniformLocation(id, name), 1, false, FloatBuffer.wrap(value.matrix))
     }
 
     private fun checkCompileErrors(shader: Int, type: String) {

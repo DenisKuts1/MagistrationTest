@@ -4,22 +4,22 @@ import java.io.BufferedReader
 import java.io.FileReader
 
 object ObjImporter {
-    fun import(path: String): Mesh{
+    fun import(path: String): Mesh {
         BufferedReader(FileReader(ObjImporter::class.java.getResource(path).path)).run {
             val coordinates = ArrayList<Vector3>()
             val normals = ArrayList<Vector3>()
             val textureCoordinates = ArrayList<Vector2>()
             val vertices = ArrayList<Vertex>()
             val indices = ArrayList<Int>()
-            while (ready()){
+            while (ready()) {
                 val line = readLine()
-                if(line.isEmpty()) continue
+                if (line.isEmpty()) continue
                 val components = line.split(" ")
-                when(components[0]){
+                when (components[0]) {
                     "v" -> coordinates += Vector3(
-                            components[1].toFloat(),
-                            components[2].toFloat(),
-                            components[3].toFloat())
+                            components[1].toFloat() / 100,
+                            components[2].toFloat() / 100,
+                            components[3].toFloat() / 100)
                     "vn" -> normals += Vector3(
                             components[1].toFloat(),
                             components[2].toFloat(),
@@ -38,7 +38,7 @@ object ObjImporter {
                                     textureCoordinates[textureId],
                                     normals[normalId]
                             )
-                            if(vertices.contains(vertex)){
+                            if (vertices.contains(vertex)) {
                                 indices += vertices.indexOf(vertex)
                             } else {
                                 vertices += vertex
@@ -53,6 +53,13 @@ object ObjImporter {
             val textures = HashMap<String, String>()
             textures["diffuseTexture"] = "/objects/${objName}_normal.png"
             textures["normalTexture"] = "/objects/${objName}_normal.png"
+            /*vertices.forEach { vertex ->
+                println(vertex)
+            }*/
+            indices.forEach {
+                println(it)
+            }
+
             return Mesh(vertices, indices, textures)
         }
     }

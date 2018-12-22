@@ -51,4 +51,8 @@ class Vector3(val x: Float, val y: Float, val z: Float) {
         if(other !is Vector3) return false
         return x == other.x && y == other.y && z == other.z
     }
+
+    override fun toString(): String {
+        return "[x = $x, y = $y, z = $z]"
+    }
 }

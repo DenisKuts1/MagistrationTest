@@ -4,6 +4,7 @@ import com.jogamp.opengl.GL
 import com.jogamp.opengl.GL2
 import com.jogamp.opengl.GL3
 import com.jogamp.opengl.GL4
+import com.jogamp.opengl.math.Matrix4
 import com.jogamp.opengl.util.texture.Texture
 import com.jogamp.opengl.util.texture.TextureIO
 import java.nio.FloatBuffer
@@ -67,6 +68,9 @@ class Mesh(vertices: ArrayList<Vertex>, indices: ArrayList<Int>, val textureFile
                 texture.bind(gl)
                 shader.setInt(key, texture.textureObject)
             }
+            val transform = Matrix4()
+            transform.translate(0f,0.2f, 0.5f)
+            shader.setMatrix4f("transform", transform)
             glBindVertexArray(VAO[0])
             glDrawElements(GL.GL_TRIANGLES, indices.capacity(), GL.GL_UNSIGNED_INT, 0)
             glBindVertexArray(0)

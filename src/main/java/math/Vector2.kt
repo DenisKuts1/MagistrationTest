@@ -5,4 +5,8 @@ class Vector2(val u: Float, val v: Float) {
         if(other !is Vector2) return false
         return u == other.u && v == other.v
     }
+
+    override fun toString(): String {
+        return "[u = $u, v = $v]"
+    }
 }

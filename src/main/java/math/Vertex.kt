@@ -17,4 +17,8 @@ data class Vertex(val position: Vector3, val textureCoordinate: Vector2, val nor
         7 -> normal.z
         else -> -1f
     }
+
+    override fun toString(): String {
+        return "position: $position, textureUV: $textureCoordinate, normal: $normal"
+    }
 }
