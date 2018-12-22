@@ -3,8 +3,8 @@ package math
 import kotlin.math.abs
 
 
-class Sphere(name: String, center: Vector3, val radius: Vector3) : Dot(name, center) {
+class Sphere(name: String, center: Vector3, val radius: Float) : Dot(name, center) {
 
-    fun intersects(other: Sphere) = radius + other.radius <= point - other.point
+    fun intersects(other: Sphere) = point - other.point <= radius + other.radius
 
 }

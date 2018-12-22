@@ -12,15 +12,23 @@ class Vector3(val x: Float, val y: Float, val z: Float) {
             y - other.y,
             z - other.z)
 
-    operator fun compareTo(other: Vector3): Int{
+    operator fun compareTo(other: Vector3): Int {
         val difference = length() - other.length()
-        return when{
+        return when {
             difference > 0 -> difference.toInt() + 1
             difference < 0 -> difference.toInt() - 1
             else -> 0
         }
     }
 
+    operator fun compareTo(other: Float): Int {
+        val difference = length() - other
+        return when {
+            difference > 0 -> difference.toInt() + 1
+            difference < 0 -> difference.toInt() - 1
+            else -> 0
+        }
+    }
 
 
     fun normalize(): Vector3 {
@@ -33,4 +41,14 @@ class Vector3(val x: Float, val y: Float, val z: Float) {
     }
 
     fun length() = Math.sqrt(x * x + y * y + z * z.toDouble()).toFloat()
+
+    companion object {
+        @JvmStatic
+        val zeroVector = Vector3(0f, 0f, 0f)
+    }
+
+    override fun equals(other: Any?): Boolean {
+        if(other !is Vector3) return false
+        return x == other.x && y == other.y && z == other.z
+    }
 }
