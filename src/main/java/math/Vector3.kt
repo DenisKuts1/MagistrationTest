@@ -30,6 +30,7 @@ class Vector3(val x: Float, val y: Float, val z: Float) {
         }
     }
 
+    operator fun times(value: Float) = Vector3(x * value, y * value, z * value)
 
     fun normalize(): Vector3 {
         val length = length()
@@ -48,7 +49,7 @@ class Vector3(val x: Float, val y: Float, val z: Float) {
     }
 
     override fun equals(other: Any?): Boolean {
-        if(other !is Vector3) return false
+        if (other !is Vector3) return false
         return x == other.x && y == other.y && z == other.z
     }
 

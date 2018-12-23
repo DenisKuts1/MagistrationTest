@@ -3,5 +3,5 @@ package math
 import javafx.scene.control.TreeItem
 
 object Hierarchy {
-    val tree = TreeItem<Dot>(Dot("Scene", Vector3.zeroVector))
+    val tree = TreeItem<Dot>(Dot("app.Scene", Vector3.zeroVector))
 }

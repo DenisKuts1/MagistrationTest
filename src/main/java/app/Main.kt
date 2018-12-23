@@ -1,4 +1,5 @@
-import assimp.Importer
+package app
+
 import com.jogamp.opengl.GLCapabilities
 import com.jogamp.opengl.GLProfile
 import com.jogamp.opengl.awt.GLCanvas
@@ -21,15 +22,15 @@ import javax.swing.SwingUtilities
 
 fun main(args: Array<String>) {
 
-    /*println(Main::class.java.getResource("objects/sphere.obj").path)
+    /*println(app.Main::class.java.getResource("objects/sphere.obj").path)
     val scene = Importer().readFile("E:/sphere.obj")
     scene?.meshes?.forEach {mesh ->
         println(mesh.name)
     }*/
-    //launch<Main>(args)
-    Window()
+    //launch<app.Main>(args)
+    Window
 }
-
+/*
 class Main : App(Scene::class)
 
 var treeView: TreeView<Dot> by singleAssign()
@@ -55,7 +56,7 @@ class Scene : View() {
                     val profile = GLProfile.get(GLProfile.GL4)
                     val capabilities = GLCapabilities(profile)
                     val canvas = GLCanvas(capabilities).apply {
-                        addGLEventListener(Engine)
+                        addGLEventListener()
                         setSize(500, 500)
                         addKeyListener(Engine)
                     }
@@ -75,24 +76,24 @@ class Scene : View() {
         }
 
         left = vbox {
-            treeView = treeview(Hierarchy.tree) {
+            app.treeView = treeview(Hierarchy.tree) {
                 selectionModel.selectedItemProperty().addListener { _, _, newValue ->
                     if(newValue!= null){
                         val entity = newValue.value
-                        PropertiesPanel.run {
-                            enable()
-                            positionX.text = entity.point.x.toString()
-                            positionY.text = entity.point.y.toString()
-                            positionZ.text = entity.point.z.toString()
-                            rotationX.text = entity.rotation.x.toString()
-                            rotationY.text = entity.rotation.y.toString()
-                            rotationZ.text = entity.rotation.z.toString()
-                            scalePropertyX.text = entity.scale.x.toString()
-                            scalePropertyY.text = entity.scale.y.toString()
-                            scalePropertyZ.text = entity.scale.z.toString()
+                        app.PropertiesPanel.run {
+                            app.PropertiesPanel.enable()
+                            app.PropertiesPanel.positionX.text = entity.point.x.toString()
+                            app.PropertiesPanel.positionY.text = entity.point.y.toString()
+                            app.PropertiesPanel.positionZ.text = entity.point.z.toString()
+                            app.PropertiesPanel.rotationX.text = entity.rotation.x.toString()
+                            app.PropertiesPanel.rotationY.text = entity.rotation.y.toString()
+                            app.PropertiesPanel.rotationZ.text = entity.rotation.z.toString()
+                            app.PropertiesPanel.scalePropertyX.text = entity.scale.x.toString()
+                            app.PropertiesPanel.scalePropertyY.text = entity.scale.y.toString()
+                            app.PropertiesPanel.scalePropertyZ.text = entity.scale.z.toString()
                         }
                     } else {
-                        PropertiesPanel.disable()
+                        app.PropertiesPanel.disable()
                     }
                 }
             }
@@ -100,7 +101,7 @@ class Scene : View() {
         }
         right {
             vbox {
-                add(PropertiesPanel)
+                add(app.PropertiesPanel)
             }
         }
     }
@@ -123,82 +124,82 @@ object PropertiesPanel: View(){
         hbox {
             prefWidth = 200.0
             label("X")
-            positionX = textfield {
+            app.PropertiesPanel.positionX = textfield {
                 prefWidth = 40.0
-                focusedProperty().addListener(propertiesFocusListener)
+                focusedProperty().addListener(app.propertiesFocusListener)
             }
             label("Y")
-            positionY = textfield {
+            app.PropertiesPanel.positionY = textfield {
                 prefWidth = 40.0
-                focusedProperty().addListener(propertiesFocusListener)
+                focusedProperty().addListener(app.propertiesFocusListener)
             }
             label("Z")
-            positionZ = textfield {
+            app.PropertiesPanel.positionZ = textfield {
                 prefWidth = 40.0
-                focusedProperty().addListener(propertiesFocusListener)
+                focusedProperty().addListener(app.propertiesFocusListener)
             }
         }
         label("Rotation") { }
         hbox {
             prefWidth = 200.0
             label("X")
-            rotationX = textfield {
+            app.PropertiesPanel.rotationX = textfield {
                 prefWidth = 40.0
-                focusedProperty().addListener(propertiesFocusListener)
+                focusedProperty().addListener(app.propertiesFocusListener)
             }
             label("Y")
-            rotationY = textfield {
+            app.PropertiesPanel.rotationY = textfield {
                 prefWidth = 40.0
-                focusedProperty().addListener(propertiesFocusListener)
+                focusedProperty().addListener(app.propertiesFocusListener)
             }
             label("Z")
-            rotationZ = textfield {
+            app.PropertiesPanel.rotationZ = textfield {
                 prefWidth = 40.0
-                focusedProperty().addListener(propertiesFocusListener)
+                focusedProperty().addListener(app.propertiesFocusListener)
             }
         }
         label("Scale") { }
         hbox {
             prefWidth = 200.0
             label("X")
-            scalePropertyX = textfield {
+            app.PropertiesPanel.scalePropertyX = textfield {
                 prefWidth = 40.0
-                focusedProperty().addListener(propertiesFocusListener)
+                focusedProperty().addListener(app.propertiesFocusListener)
             }
             label("Y")
-            scalePropertyY = textfield {
+            app.PropertiesPanel.scalePropertyY = textfield {
                 prefWidth = 40.0
-                focusedProperty().addListener(propertiesFocusListener)
+                focusedProperty().addListener(app.propertiesFocusListener)
             }
             label("Z")
-            scalePropertyZ = textfield {
+            app.PropertiesPanel.scalePropertyZ = textfield {
                 prefWidth = 40.0
-                focusedProperty().addListener(propertiesFocusListener)
+                focusedProperty().addListener(app.propertiesFocusListener)
             }
         }
     }
 
     fun disable(){
-        positionX.isDisable = true
-        positionY.isDisable = true
-        positionZ.isDisable = true
-        rotationX.isDisable = true
-        rotationY.isDisable = true
-        rotationZ.isDisable = true
-        scalePropertyX.isDisable = true
-        scalePropertyY.isDisable = true
-        scalePropertyZ.isDisable = true
+        app.PropertiesPanel.positionX.isDisable = true
+        app.PropertiesPanel.positionY.isDisable = true
+        app.PropertiesPanel.positionZ.isDisable = true
+        app.PropertiesPanel.rotationX.isDisable = true
+        app.PropertiesPanel.rotationY.isDisable = true
+        app.PropertiesPanel.rotationZ.isDisable = true
+        app.PropertiesPanel.scalePropertyX.isDisable = true
+        app.PropertiesPanel.scalePropertyY.isDisable = true
+        app.PropertiesPanel.scalePropertyZ.isDisable = true
     }
     fun enable(){
-        positionX.isDisable = false
-        positionY.isDisable = false
-        positionZ.isDisable = false
-        rotationX.isDisable = false
-        rotationY.isDisable = false
-        rotationZ.isDisable = false
-        scalePropertyX.isDisable = false
-        scalePropertyY.isDisable = false
-        scalePropertyZ.isDisable = false
+        app.PropertiesPanel.positionX.isDisable = false
+        app.PropertiesPanel.positionY.isDisable = false
+        app.PropertiesPanel.positionZ.isDisable = false
+        app.PropertiesPanel.rotationX.isDisable = false
+        app.PropertiesPanel.rotationY.isDisable = false
+        app.PropertiesPanel.rotationZ.isDisable = false
+        app.PropertiesPanel.scalePropertyX.isDisable = false
+        app.PropertiesPanel.scalePropertyY.isDisable = false
+        app.PropertiesPanel.scalePropertyZ.isDisable = false
     }
 }
 
@@ -220,9 +221,9 @@ class InstrumentPanel : View() {
 
         hbox {
             button("Add Sphere").action {
-                val selectedItem = treeView.selectionModel.selectedItem
+                val selectedItem = app.treeView.selectionModel.selectedItem
                 if (selectedItem == null) {
-                    treeView.getTreeItem(0).children.add(TreeItem(Sphere("Sphere1", Vector3.zeroVector, 1f)))
+                    app.treeView.getTreeItem(0).children.add(TreeItem(Sphere("Sphere1", Vector3.zeroVector, 1f)))
                 } else {
                     selectedItem.children.add(TreeItem(Sphere("Sphere1", Vector3.zeroVector, 1f)))
                 }
@@ -234,21 +235,22 @@ class InstrumentPanel : View() {
 val propertiesFocusListener = {_: ObservableValue<out Boolean>, _: Boolean, newValue: Boolean ->
     if(!newValue){
         PropertiesPanel.run {
-            treeView.selectedValue?.point = Vector3(
-                    positionX.text.toFloat(),
-                    positionY.text.toFloat(),
-                    positionZ.text.toFloat()
+            app.treeView.selectedValue?.point = Vector3(
+                    app.PropertiesPanel.positionX.text.toFloat(),
+                    app.PropertiesPanel.positionY.text.toFloat(),
+                    app.PropertiesPanel.positionZ.text.toFloat()
             )
-            treeView.selectedValue?.rotation = Vector3(
-                    rotationX.text.toFloat(),
-                    rotationY.text.toFloat(),
-                    rotationZ.text.toFloat()
+            app.treeView.selectedValue?.rotation = Vector3(
+                    app.PropertiesPanel.rotationX.text.toFloat(),
+                    app.PropertiesPanel.rotationY.text.toFloat(),
+                    app.PropertiesPanel.rotationZ.text.toFloat()
             )
-            treeView.selectedValue?.scale = Vector3(
-                    scalePropertyX.text.toFloat(),
-                    scalePropertyY.text.toFloat(),
-                    scalePropertyZ.text.toFloat()
+            app.treeView.selectedValue?.scale = Vector3(
+                    app.PropertiesPanel.scalePropertyX.text.toFloat(),
+                    app.PropertiesPanel.scalePropertyY.text.toFloat(),
+                    app.PropertiesPanel.scalePropertyZ.text.toFloat()
             )
         }
     }
 }
+*/

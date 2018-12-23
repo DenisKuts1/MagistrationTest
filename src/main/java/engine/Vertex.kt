@@ -1,4 +1,7 @@
-package math
+package engine
+
+import math.Vector2
+import math.Vector3
 
 data class Vertex(val position: Vector3, val textureCoordinate: Vector2, val normal: Vector3) {
     override fun equals(other: Any?): Boolean {

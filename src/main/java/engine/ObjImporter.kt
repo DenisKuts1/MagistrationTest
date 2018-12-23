@@ -1,5 +1,7 @@
-package math
+package engine
 
+import math.Vector2
+import math.Vector3
 import java.io.BufferedReader
 import java.io.FileReader
 
@@ -53,12 +55,6 @@ object ObjImporter {
             val textures = HashMap<String, String>()
             textures["diffuseTexture"] = "/objects/${objName}_normal.png"
             textures["normalTexture"] = "/objects/${objName}_normal.png"
-            /*vertices.forEach { vertex ->
-                println(vertex)
-            }*/
-            indices.forEach {
-                println(it)
-            }
 
             return Mesh(vertices, indices, textures)
         }

@@ -1,10 +1,10 @@
-package math
+package engine
 
-import com.jogamp.opengl.GL
 import com.jogamp.opengl.GL2
 import com.jogamp.opengl.GL4
 import com.jogamp.opengl.math.Matrix4
-import glm_.glm
+import glm_.mat4x4.Mat4
+import glm_.vec4.Vec4
 import java.io.BufferedReader
 import java.io.FileReader
 import java.nio.ByteBuffer
@@ -68,8 +68,11 @@ class Shader(val gl: GL4, vertexPath: String, fragmentPath: String) {
         gl.glUniform1f(gl.glGetUniformLocation(id, name), value)
     }
 
-    fun setMatrix4f(name: String, value: Matrix4){
-        gl.glUniformMatrix4fv(gl.glGetUniformLocation(id, name), 1, false, FloatBuffer.wrap(value.matrix))
+    fun setMatrix4f(name: String, value: Mat4){
+        gl.glUniformMatrix4fv(gl.glGetUniformLocation(id, name), 1, false, FloatBuffer.wrap(value.array))
+    }
+    fun setVec4f(name: String, value: Vec4){
+        gl.glUniform4fv(gl.glGetUniformLocation(id, name), 1, FloatBuffer.wrap(value.array))
     }
 
     private fun checkCompileErrors(shader: Int, type: String) {
